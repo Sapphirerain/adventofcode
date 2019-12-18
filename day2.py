@@ -1,4 +1,4 @@
-"""part 1/2"""
+"""part 1+2"""
 # set up input file
 input_path = './input2.txt'
 with open(input_path) as f:
