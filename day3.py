@@ -42,19 +42,25 @@ wire1.coords += [wire1.move(path) for path in paths[0] if type(path) == str]
 wire2.coords += [wire2.move(path) for path in paths[1] if type(path) == str]
 
 # flatten lists
-wire1.coords = set(item for sublist in wire1.coords for item in sublist)
-wire2.coords = set(item for sublist in wire2.coords for item in sublist)
-#print(wire1.coords)
-#print(wire2.coords)
-#common = [coord for coord in wire1.coords if coord in wire2.coords]
-common  = set(wire1.coords & wire2.coords)
-
+wire1.coords = [item for sublist in wire1.coords for item in sublist]
+wire2.coords = [item for sublist in wire2.coords for item in sublist]
+# make sets
+wire1_set = set(wire1.coords)
+wire2_set = set(wire2.coords)
+# find intersections
+common  = set(wire1_set & wire2_set)
 print(common)
 
 def distance(coord):
     return abs(coord[0]) + abs(coord[1])
 
 distances = [distance(coord) for coord in common]
-print(distances)
-print(len(common),  len(distances))
+#print(distances)
 print(min(distances))
+
+"""part 2"""
+#print(wire1.coords)
+#print(wire2.coords)
+wire_dists = [wire1.coords.index(x) + wire2.coords.index(x) + 2 for x in common]
+#print(wire_dists)
+print(min(wire_dists))
